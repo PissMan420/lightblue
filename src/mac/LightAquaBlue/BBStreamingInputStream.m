@@ -30,20 +30,20 @@
 - (id)initWithDelegate:(id)delegate
 {
     self = [super init];
-    
+
     mDelegate = delegate;
     mStatus = NSStreamStatusNotOpen;
-    
+
     return self;
 }
 
-- (int)read:(uint8_t *)buffer maxLength:(unsigned int)maxLength
+- (int)read:(uint8_t *)buffer maxLength:(unsigned long)maxLength
 {
     NSData *data = [mDelegate readDataWithMaxLength:maxLength];
-    if (!data) 
+    if (!data)
         return -1;
 
-    int copyLength = [data length] < maxLength ? [data length] : maxLength;
+    int copyLength = (int)[data length] < maxLength ? (int)[data length] : maxLength;
     [data getBytes:buffer length:copyLength];
     return copyLength;
 }
