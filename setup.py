@@ -63,4 +63,7 @@ if MAC:
     if "install" in sys.argv:
         import os
         os.chdir("src/mac/LightAquaBlue")
-        os.system("xcodebuild install -target LightAquaBlue -configuration Release DSTROOT=/ INSTALL_PATH=/Library/Frameworks DEPLOYMENT_LOCATION=YES")
+        if os.path.exists('./build'):
+            os.system('rm -rf ./build')
+        os.system("xcodebuild install -target LightAquaBlue -configuration " +
+        "Release DSTROOT=/ INSTALL_PATH=/Library/Frameworks DEPLOYMENT_LOCATION=YES")
